@@ -23,3 +23,7 @@ Also, don't forget to additionally specify repository with PAT (Personal Access 
     </repository>
 </repositories>
 ```
+
+## Used Links
+* https://medium.com/nerd-for-tech/maven-with-github-actions-and-packages-a-ci-read-b968173b018f
+* https://github.community/t/how-to-make-github-packages-to-the-public/171321
