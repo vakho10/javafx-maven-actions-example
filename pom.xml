@@ -1,0 +1,100 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 https://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <modelVersion>4.0.0</modelVersion>
+
+    <groupId>ge.vakho</groupId>
+    <artifactId>javafx-maven-actions-example</artifactId>
+    <version>1.0-SNAPSHOT</version>
+    <name>javafx-maven-actions-example</name>
+
+    <properties>
+        <java.version>17</java.version>
+        <maven.compiler.source>${java.version}</maven.compiler.source>
+        <maven.compiler.target>${java.version}</maven.compiler.target>
+        <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+        <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
+        <junit.version>5.8.1</junit.version>
+        <javafx.version>18.0.2</javafx.version>
+        <javafx-maven-plugin.version>0.0.8</javafx-maven-plugin.version>
+        <main-class>ge.vakho.HelloApplication</main-class>
+    </properties>
+
+    <dependencies>
+        <dependency>
+            <groupId>org.openjfx</groupId>
+            <artifactId>javafx-controls</artifactId>
+            <version>${javafx.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>org.openjfx</groupId>
+            <artifactId>javafx-fxml</artifactId>
+            <version>${javafx.version}</version>
+        </dependency>
+
+        <dependency>
+            <groupId>org.junit.jupiter</groupId>
+            <artifactId>junit-jupiter-api</artifactId>
+            <version>${junit.version}</version>
+            <scope>test</scope>
+        </dependency>
+        <dependency>
+            <groupId>org.junit.jupiter</groupId>
+            <artifactId>junit-jupiter-engine</artifactId>
+            <version>${junit.version}</version>
+            <scope>test</scope>
+        </dependency>
+    </dependencies>
+
+    <build>
+        <plugins>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-compiler-plugin</artifactId>
+                <version>3.8.1</version>
+                <configuration>
+                    <source>${java.version}</source>
+                    <target>${java.version}</target>
+                </configuration>
+            </plugin>
+            <plugin>
+                <groupId>org.openjfx</groupId>
+                <artifactId>javafx-maven-plugin</artifactId>
+                <version>${javafx-maven-plugin.version}</version>
+                <executions>
+                    <execution>
+                        <goals>
+                            <goal>jlink</goal>
+                        </goals>
+                        <phase>package</phase>
+                    </execution>
+                </executions>
+                <configuration>
+                    <!-- Prints additional information to console -->
+                    <stripDebug>true</stripDebug>
+                    <jlinkVerbose>true</jlinkVerbose>
+
+                    <!-- Removes the includes directory in the resulting runtime image -->
+                    <noHeaderFiles>true</noHeaderFiles>
+
+                    <!-- Removes the man directory in the resulting runtime image -->
+                    <noManPages>true</noManPages>
+
+                    <!-- Adds a launcher script with the given name -->
+                    <launcher>${project.name}-launcher</launcher>
+
+                    <!-- The name of the folder with the resulting runtime image -->
+                    <jlinkImageName>${project.name}</jlinkImageName>
+
+                    <!-- When set, creates a zip of the resulting runtime image with specified
+                        compression level -->
+                    <jlinkZipName>${project.name} ${project.version}</jlinkZipName>
+                    <compress>2</compress>
+
+                    <mainClass>${main-class}</mainClass>
+                </configuration>
+            </plugin>
+        </plugins>
+    </build>
+</project>
